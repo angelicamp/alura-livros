@@ -1,17 +1,9 @@
-const http = require("http")
-const port = 8080;
+import app from "./src/app.js";
 
-const rotas = {
-    '/': 'Bem-vindo ao Alura livros',
-    '/livros': 'Bem-vindo a seleção de livros',
-    '/autores': 'Bem-vindo a seleção de autores'
-}
+// process.env.PORT: é a constante que vai identificar a porta que esta sendo escutada
+// ou a porta 8080
+const port = process.env.PORT || 8080;
 
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'test/plain'});
-    res.end(rotas[req.url]);
-})
-
-server.listen(port, () => {
+app.listen(port, () => {
     console.log('Servidor escutando em http://localhost:'+ port)
 })
