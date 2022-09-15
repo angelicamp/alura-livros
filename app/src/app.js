@@ -1,5 +1,6 @@
 import express from "express"
 import db from "./config/dbConnect.js";
+import livros from "./models/Livro.js"
 
 db.on("error", console.log.bind(console, 'Erro ao conectar com o banco de dados'))
 db.once("open", () => {
@@ -9,18 +10,21 @@ db.once("open", () => {
 const app = express();
 app.use(express.json());
 
-const livros = [
-    {id: 1, 'Titulo': 'Clean Code'},
-    {id: 2, 'Titulo': 'Arquitetura Limpa'}
-]
+// const livros = [
+//     {id: 1, 'Titulo': 'Clean Code'},
+//     {id: 2, 'Titulo': 'Arquitetura Limpa'}
+// ]
 
 app.get('/', (req, res) =>{
     res.status(200).send('Bem-vindo ao Alura Livros');
 })
 
-app.get('/livros', (req, res) =>{
-    res.status(200).json(livros);
+app.get('/livros', (req, res) => {
+    livros.find((err, livros) => {
+        res.status(200).json(livros)
+    })
 })
+
 app.get('/livros/:id', (req, res) => {
     let index = buscarLivro(req.params.id);
     res.json(livros[index]);
