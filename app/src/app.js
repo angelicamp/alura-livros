@@ -34,5 +34,13 @@ app.put('/livros/:id', (req, res) => {
 function buscarLivro(id) {
     return livros.findIndex(livro => livro.id == id)
 }
+
+app.delete('/livros/:id', (req, res) => {
+    let {id} = req.params;
+    let index = buscarLivro(id);
+    livros.splice(index, 1);
+    res.send('Livro ' + id + ' removido com sucesso')
+})
+
 //Importante: é necessario exportar para que o server consiga utilizar esses objetos
 export default app
