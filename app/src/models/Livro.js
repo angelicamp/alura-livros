@@ -10,6 +10,7 @@ const livroSchema = new mongoose.Schema(
     }
 );
 
+// esse 'livros' dentro de model é o nome da minha collection, caso ela nao exista no db sera criada automaticamente
 const livros = mongoose.model('livros', livroSchema);
 
 export default livros;
